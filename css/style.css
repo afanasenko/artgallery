@@ -1,0 +1,293 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	font-family: Gill Sans,Arial,sans-serif;
+	color: #900;
+	margin:0px;
+	margin-top:10px;
+	padding:5px;
+	text-indent:0pt;
+}
+
+h4 {
+	margin-bottom:5pt;
+	padding-left:5px;
+}
+
+.wrapper {
+	width: 100%;
+	min-width: 850px;
+
+}
+
+div.header {
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	background-color:#ffcc66;	
+	font-size:large;
+	/*height:auto;*/
+}
+
+table.title_block {
+	width: 100%;
+	/*margin-left:80px;*/
+	margin-bottom:25px;
+}
+
+.middle{
+	width: 100%;
+	position: relative;
+	margin:0px;
+	background: white url("../img/border_right.png");	
+	background-repeat: repeat-y;
+	background-position: left top;	
+	/*background-attachment: fixed;*/		
+}
+
+.middle:after {
+	display: table;
+	clear: both;
+	content: '';
+}
+
+.left_sidebar{
+	background:oldlace;
+	float: left;
+	width: 16em;
+	margin-top: -10px;	
+	margin-left: -100%;
+	position:relative;
+	min-height:200px;
+	/*border-right: 1px #888899 solid;*/
+	border: 1px #888899 solid;
+}
+
+.container {
+	width: 100%;
+	float: left;
+}
+
+.content {
+	width: 55em;
+	padding: 0 0 0 17em;
+	min-height: 30em;
+}
+
+.footer{
+	border-top: 1px #888899 solid;
+	background:#ffcc66;
+	height:80px;
+	text-align:center;
+    vertical-align:middle;
+	margin-top: 10px;
+}
+/* Главное меню сайта */
+ul.menu-1 {
+	list-style: none;
+	border-bottom: 1px #888899 solid;
+	padding-bottom: 10px;
+	margin-left: 0px;
+}
+
+ul.menu-1 li {
+	display: inline;
+	margin-left: 0px;
+}
+
+ul.menu-1 li a {
+	color: #888899;
+	text-decoration: none;
+	background: #f7f7f9;
+	border: 1px #bbbbcc solid;
+	border-bottom: none;
+	padding: 10px 14px 10px 10px;
+}
+
+ul.menu-1 li a:hover {
+	background: #ffffff;		
+	padding: 14px 14px 10px 10px;
+}
+
+ul.menu-1 li a.selected {
+	color: #900;
+	background: #ffffff;
+	border: 1px #888899 solid;
+	border-bottom: 1px #ffffff solid;
+	padding: 14px 14px 10px 10px;	
+}
+
+a.small_link {
+	color: #808080;
+	font-size:small;
+	text-decoration: underline;
+	padding-left: 10px;
+}
+
+p.small_text {
+	color: #808080;
+	font-size:small;
+	padding-left: 10px;
+}
+
+a.common-link {
+	color: #900;
+	text-decoration: underline;
+}
+
+.content p {
+	color:#202030;
+	text-align:justify;
+	padding-right:20px;	
+	margin-top:0px;
+}
+
+.content ul {
+	list-style-type:none;
+}
+
+/* Картинка в тексте справа */
+.image-right {
+    float: right; /* Выравнивание по правому краю  */ 
+    margin: 7px 0 7px 7px; /* Отступы вокруг картинки */
+}
+
+.small-menu {
+	/*border-bottom: 1px #888899 solid;*/
+}
+
+div.img  {
+  margin:5px;
+  padding: 5px;
+  height:auto;
+  width:auto;
+  float:left;
+  text-align:center;
+  vertical-align:center;
+}
+
+div.img p {
+  margin:0px;
+}
+  
+div.img img {
+  display:inline;
+  margin:0px;
+  border:2px solid #ffffff;
+}
+
+div.img a:hover img  {
+  border:2px solid #900;
+}
+
+div.img_medium img {
+  display:inline;
+  margin:0px;
+  border:0px;
+}
+  
+div.desc  {
+  text-align:left;
+  font-weight:normal;
+  font-size:small;
+  width:160px;
+  margin:0px;
+}
+
+ul.gallery-content {
+	list-style: none;
+	border: 2px solid #ffffff;
+	padding: 5px;
+	margin: 0px;
+}
+
+ul.gallery-content li {
+	display: inline;
+	margin-left: 0px;
+}
+
+table.gallery-content {
+	padding: 0px;
+	margin: 5px;
+}
+
+table.gallery-content td {
+	vertical-align: top;
+	/*width: 250px;*/
+}
+
+table.gallery-content td.highlight {
+	vertical-align: top;
+	background: oldlace;
+	border: 1px solid #aaa;	
+}
+
+table.picpage {
+	padding: 0px;
+	margin-top: 15px;
+	margin-bottom: 15px;	
+}
+
+table.picpage td {
+	padding-right: 25px;
+}
+
+.field {
+	clear: both;
+	text-align: right;
+	line-height:25px;
+}
+
+.field label {
+	float:left;
+}
+
+.field input {
+	width:200px;
+}
+
+.auth-form {
+	margin-left:20%;
+	margin-right:20%;	
+	background:oldlace;
+	padding:15px;
+	border: 1px #888899 solid;	
+	border-radius: 5px;
+}
+
+table.admin-form {
+	background:#fff2f3;
+	border-collapse: collapse;
+}
+
+table.admin-form tr.oddrow{
+	background:#ffffff;
+}
+
+table.admin-form th {
+	text-align: right;
+	width: 200px;
+	height: 25pt;
+}
+
+.error-box {
+	background: #ffaaaa;
+	border: 1px #FF4444 solid;		
+	padding: 10pt;
+}
+
+table.pic-nav {
+	padding-left: 10px;	
+	width: 60%;
+}
+
+table.dataedit {
+	background:#fff2f3;
+	margin:0;
+	border-collapse: collapse;
+}
+
+table.dataedit tr.oddrow{
+	background:#ffffff;
+	border: 0px;
+	margin:0;
+}

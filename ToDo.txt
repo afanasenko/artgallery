@@ -1,0 +1,41 @@
+Многостраничность в каталоге
+Выпадающее меню в главном меню
+Новые функции в администраторском разделе (поиск, добавление художников, добавление жанров)
+Централизация обработки ошибок
+Добавить метки на карту проезда
+Причесать стили
+Сделать отображение текущей навигации
+Перетекание текста на странице художника (выровнять заголовок и фото).
+Версия базы данных и дата последнего обновления сайта
+Скрипт для выкладывания на сайт
+Форма обратной связи
+Художники в таблице
+Разделы в каталоге
+Альбомы
+Публикации
+
+
+=============================================================================
+ 
+
+If your Font is a free Font, you could convert your Font using for example a onlinefontconverter, but .otf is a good type for using @font-face
+@font-face {
+font-family: GraublauWeb;
+src: url("path-to-the-font-file/GraublauWeb.otf") format("opentype");
+}
+
+@font-face {
+font-family: GraublauWeb;
+font-weight: bold;
+src: url("path-to-the-font-file/GraublauWebBold.otf") format("opentype");
+}
+
+checkout this link to see how it works.
+
+because @font-face is not working in all browsers (IE),read "@font-face in IE: Making Web Fonts Work".
+
+hope this helps
+ 
+=============================================================================
+ 
+ 
