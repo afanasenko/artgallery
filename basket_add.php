@@ -10,12 +10,12 @@
 			die("<p>Неверный запрос: " . mysql_error() . "</p>");
 	}
 
-	if (isset($_GET['painting']) and $_GET['painting'] > 0)
+	if (isset($_POST['painting']) and $_POST['painting'] > 0)
 	{
 		$basket = basket_name();
 		new_basket($basket);
 	
-		$pic_id = $_GET['painting'];
+		$pic_id = $_POST['painting'];
 		
 		$query = "SELECT name_painting, price, first_name, last_name FROM paintings, artists WHERE paintings.id_artist = artists.id_artist AND id_painting = {$pic_id};";	
 		
@@ -23,22 +23,18 @@
 		if (!$result)
 			die("<p>Неверный запрос: " . mysql_error() . "</p>");		
 		
-		
 		if ($result)
 		{
 			$row = mysql_fetch_assoc($result);
 			$desc = $row['first_name'] . ' ' . $row['last_name'] . '. ' . $row['name_painting'];
 			
-			$query = 'INSERT INTO ' . $basket . ' (id_painting, description, price) VALUES(' . $pic_id . ', \'' . $desc . '\', ' . $row['price'] . ');';
+			$query = 'INSERT INTO `' . $basket . '` (id_painting, description, price) VALUES(' . $pic_id . ', \'' . $desc . '\', ' . $row['price'] . ');';
 			$res = mysql_query($query);			
-			/*
-			if (!isset($_GET['r']))
-			{
-				if (!$res)
-					handle_error();
-			}
-			*/
 		}
+		echo count_elements($basket, '', '');		
 	}
-	echo count_elements($basket, '', '');
+	else
+	{
+		echo '0';
+	}
 ?>

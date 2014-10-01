@@ -10,6 +10,7 @@
 <link href="/css/style.css" rel="stylesheet" type="text/css" />
 <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
 <script type="text/javascript" src="/js/common.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js" charset="utf-8"></script>
 </head>
 
 <body>
@@ -22,8 +23,8 @@
         	    <td width="70%"><h3><?php echo PAGE_TITLE; ?></h3></td>	
 <?php
 	echo '<td>';
-	echo '<img src="./img/flag_rus.jpg" width="32px"><a href="' . $_SERVER['REQUEST_URI'] . '">Rus</a>';
-	#echo '<img src="./img/flag_uk.jpg" width="32px"><a href="' . $_SERVER['REQUEST_URI'] . '">Eng</a></br>';
+	echo '<img src="./img/flag_rus.jpg" width="32px"><a href="' . $_SERVER['REQUEST_URI'] . '"></a>';
+	echo '<img src="./img/flag_uk.jpg" width="32px"><a href="' . $_SERVER['REQUEST_URI'] . '"></a></br>';
 	echo '</td>';
 ?>				
 				<td>

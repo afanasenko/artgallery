@@ -28,27 +28,6 @@ function click_painting(int) {
 	xmlhttp.send(null);
 }
 
-function buy_painting(int) {
-	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-		xmlhttp=new XMLHttpRequest();
-	}
-	else {// code for IE6, IE5
-		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	
-	//window.alert("./basket_add.php?painting="+int+"&r="+Math.random());
-	xmlhttp.onreadystatechange=function() {
-		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-			var res = xmlhttp.responseText;
-			document.getElementById("basket_label").innerHTML='Корзина ('+res+')';
-		}
-	}	
-	
-	// в конец запроса добавляется случайный изменяющийся параметр, иначе вернет закешированный результат
-	xmlhttp.open("GET", "./basket_add.php?painting="+int+"&r="+Math.random(), true);
-	xmlhttp.send(null);
-}
-
 function make_vote() {
 
 	var elem = document.getElementById("painting_rating");

@@ -33,9 +33,9 @@
 		if (empty($field_name) or empty($field_value))
 			$clause = '';
 		else
-			$clause = "WHERE {$field_name} = {$field_value}";
+			$clause = "WHERE `{$field_name}` = {$field_value}";
 	
-		$result = mysql_query("SELECT count(*) as total FROM {$table_name} {$clause};");
+		$result = mysql_query("SELECT count(*) as total FROM `{$table_name}` {$clause};");
 		if (!$result)
 			return 0;
 		$data = mysql_fetch_assoc($result);

@@ -44,7 +44,7 @@
 	define('PAGE_TITLE', 'ArtRuGallery: Modern Russian art gallery');
 	define('CMD_EXIT', 'Sign Out');
 	define('CMD_AUTHORIZATION', 'Sign In');	
-	define('CMD_BASKET', 'Basket');
+	define('CMD_BASKET', 'Chart');
 	define('CMD_HOME', 'Home');	
 	define('CMD_PAINTINGS', 'Paintings');
 	define('CMD_ARTISTS', 'Artists');

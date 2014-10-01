@@ -1,5 +1,26 @@
 <?php
 	require('./header.php'); 
+?>
+
+<script>
+
+	function buy_painting(int) {
+	
+		var url = "./basket_add.php";		
+		$.post(url, { "painting" : int, "r" : Math.random() }, function(response){
+			console.log(response);
+			$("#basket_label").html('Корзина ('+response+')');
+		});			
+	}	
+/*
+	$( document ).ready(function() {
+		$("#.add-to-chart").click(function () {	
+		}
+	}	
+*/
+</script>
+
+<?php
 	require_once('./catalogue_routines.php');	
 	require_once('./admin_routines.php');	
 	
@@ -58,7 +79,7 @@
 			else
 				$price_str = 'уточняйте';
 				
-			echo '<tr><td>Цена: ' . $price_str . '</td><td><input type="button" name="buy" value="' . $btn_text . '" onclick="buy_painting(' . $pic_id . ');"/></td></tr>';
+			echo '<tr><td>Цена: ' . $price_str . '</td><td><input type="button" id="add-to-chart" name="buy" value="' . $btn_text . '" onclick="buy_painting(' . $pic_id . ');"/></td></tr>';
 		}
 		
 		echo '</table>';
