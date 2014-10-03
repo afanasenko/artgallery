@@ -1,59 +1,70 @@
 <?php
-	require_once('./app_config.php');
+	require_once('./catalogue_routines.php');
+	require_once('./admin_routines.php');	
+	require_once('./translation.php');
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><?php echo SITE_TITLE; ?></title>
-<link href="/css/style.css" rel="stylesheet" type="text/css" />
-<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
-<script type="text/javascript" src="/js/common.js" charset="utf-8"></script>
-<script type="text/javascript" src="/js/jquery-1.10.2.min.js" charset="utf-8"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title><?php echo tr('SITE_TITLE'); ?></title>
+	<link href="/css/style.css" rel="stylesheet" type="text/css" />
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+	<script type="text/javascript" src="js/common.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/jquery-1.10.2.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="./js/jquery_cookie.js" charset="utf-8"></script>
 </head>
 
 <body>
 
+	<script>
+		function SetLang(lang) {
+			console.log(lang);
+			
+			if (lang=='ru')
+				$.cookie('language', 'ru', {expires : 365});
+			else
+				$.cookie('language', 'en', {expires : 365});
+			
+			location.reload(true);
+		}
+	</script>
+
 	<div class="wrapper">        
 		<div class="header">
+
 			<table class = "title_block">
 			  <tr>
-        	    <td><img src="./img/header_left.png" height="64px"></td>
-        	    <td width="70%"><h3><?php echo PAGE_TITLE; ?></h3></td>	
+        	    <td width="128px"></td>
+        	    <td width="70%"><h3><?php echo tr('PAGE_TITLE'); ?></h3></td>	
 <?php
 	echo '<td>';
-	echo '<img src="./img/flag_rus.jpg" width="32px"><a href="' . $_SERVER['REQUEST_URI'] . '"></a>';
-	echo '<img src="./img/flag_uk.jpg" width="32px"><a href="' . $_SERVER['REQUEST_URI'] . '"></a></br>';
+	echo '<a href=#><img src="./img/flag_rus.jpg" width="32px" id="switch_russian" onclick="SetLang(\'ru\');"></img></a>';
+	echo '<a href=#><img src="./img/flag_uk.jpg" width="32px" id="switch_english" onclick="SetLang(\'en\');"></img></a>';	
 	echo '</td>';
-?>				
-				<td>
-<?php
-	require_once('./catalogue_routines.php');
-	require_once('./admin_routines.php');
-	
+	echo '<td style="background: white">';
+
 	# для администраторов даем ссылку на редактирование
 	if (isset($_COOKIE['username']))
 	{
 		echo $_COOKIE['username'];
-		echo '<a class="small_link" href="./switch_user.php">' . CMD_EXIT . '</a></br>';
+		echo '<a class="small_link" href="./switch_user.php">' . tr('CMD_EXIT') . '</a></br>';
 	}
 	else
 	{
-		echo '<a class="small_link" href="./switch_user.php">' . CMD_AUTHORIZATION . '</a></br>';
+		echo '<a class="small_link" href="./switch_user.php">' . tr('CMD_AUTHORIZATION') . '</a></br>';
 	}
 	
 	$basket = basket_name();
-	echo '<a class="small_link" href="./basket.php" id="basket_label">'. CMD_BASKET . ' (' . count_elements($basket, '', '') . ')</a></br>';
+	echo '<a class="small_link" href="./basket.php" id="basket_label">'. tr('Chart') . ' (' . count_elements($basket, '', '') . ')</a></br>';
 	
-?>
-				</td>
-				<td><img src="./img/header_right.png" height="64px"></td>
-			  </tr>
-			</table>
+	echo '</td>';
+	echo '</tr>';
+	echo '</table>';
 
-        	<ul class="menu-1">
-<?php
+    echo '<ul class="menu-1">';
+
 	//FIXME: изучить регулярные выражения!
 	$pieces = explode("/", $_SERVER['REQUEST_URI']);
 	$pieces = explode("?", end($pieces));
@@ -61,18 +72,19 @@
 	
 	$sel[$pieces[0]] = 'class = "selected"';
 	
-	echo('<li><a href="./news.php"' . $sel["news"] . '>' . CMD_HOME . '</a></li>');
-	echo('<li><a href="./catalogue.php"' . $sel["catalogue"] . '>' . CMD_PAINTINGS . '</a></li>');
-	echo('<li><a href="./artists.php"' .  $sel["artists"] . '>' . CMD_ARTISTS . '</a></li>');
-	# echo('<li><a href="./exhibitions.php"' . $sel["exhibitions"] . '>' . CMD_EXHIBITIONS . '</a></li>');
-	echo('<li><a href="./publications.php"' . $sel["publications"] . '>' . CMD_PUBLICATIONS . '</a></li>');	
-	echo('<li><a href="./services.php"' . $sel["services"] . '>' . CMD_SERVICES . '</a></li>');		
-	echo('<li><a href="./contacts.php"' . $sel["contacts"] . '>' . CMD_ABOUT_US . '</a></li>');
+	echo('<li><a href="./news.php"' . $sel["news"] . '>' . tr('CMD_HOME') . '</a></li>');
+	echo('<li><a href="./catalogue.php"' . $sel["catalogue"] . '>' . tr('CMD_PAINTINGS') . '</a></li>');
+	echo('<li><a href="./artists.php"' .  $sel["artists"] . '>' . tr('CMD_ARTISTS') . '</a></li>');
+	# echo('<li><a href="./exhibitions.php"' . $sel["exhibitions"] . '>' . tr('Exhibitions') . '</a></li>');
+	echo('<li><a href="./publications.php"' . $sel["publications"] . '>' . tr('Publications') . '</a></li>');	
+	echo('<li><a href="./services.php"' . $sel["services"] . '>' . tr('CMD_SERVICES') . '</a></li>');		
+	echo('<li><a href="./contacts.php"' . $sel["contacts"] . '>' . tr('CMD_ABOUT_US') . '</a></li>');
 	
-	if (is_admin() and !strcmp(LANG, 'ru'))
-		echo('<li><a href="./management.php"' . $sel['management'] . '>Управление</a></li>');
+	if (is_admin())
+		echo('<li><a href="./management.php"' . $sel['management'] . '>' . tr('MANAGE') . '</a></li>');
+		
+	echo('</ul>');
 ?>
-		</ul>
 		</div><!-- .header-->
 
 		<div class="middle">

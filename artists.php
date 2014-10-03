@@ -1,9 +1,7 @@
 <?php 
-	require_once("./catalogue_routines.php");		
 	require("./header.php");
 	
-	//FIXME: при ошибках не нарушать скелет страницы!!!
-	require_once("./db_connect.php");
+	$is_english = !strcmp(current_lang(), 'en');
 	
 	if (isset($_GET['artist']))
 	{
@@ -11,7 +9,10 @@
 		$aid = $_GET['artist'];
 		
 		//Запрос на имя художников
-		$result = mysql_query("SELECT first_name, middle_name, last_name, token FROM artists WHERE id_artist = {$aid};");
+		if ($is_english)
+			$result = mysql_query("SELECT first_name_en, middle_name_en, last_name_en, token FROM artists WHERE id_artist = {$aid};");
+		else
+			$result = mysql_query("SELECT first_name, middle_name, last_name, token FROM artists WHERE id_artist = {$aid};");
 		
 		if (!$result) {
 			die("<p>Неверный запрос: " . mysql_error() . "</p>");
@@ -27,15 +28,15 @@
 				// общее число картин, принадлежащих данному художнику
 				$count = count_elements('paintings', 'id_artist', $aid);
 				if ($count)
-					echo "<td><a class=\"small_link\" href=/catalogue.php?artist={$aid}>Работы ({$count})</a></td>";
+					echo '<td><a class="small_link" href="/catalogue.php?artist=' . $aid . '">' . tr('Works') . '(' . $count . ')</a></td>';
 					
 				$count = count_elements('exhibitions', 'id_artist', $aid);
 				if ($count)					
-					echo "<td><a class=\"small_link\" href=/exhibitions.php?artist={$aid}>Выставки ({$count})</a></td>";		
+					echo '<td><a class="small_link" href="/exhibitions.php?artist=' . $aid . '">' . tr('Exhibitions') . '(' . $count . ')</a></td>';		
 
 				$count = count_elements('publications', 'id_artist', $aid);
 				if ($count)										
-					echo "<td><a class=\"small_link\" href=/publications.php?artist={$aid}>Публикации ({$count})</a></td>";						
+					echo '<td><a class="small_link" href="/publications.php?artist=' . $aid . '">' . tr('Publications') . '(' . $count . ')</a></td>';
 			echo "</tr>";
 		echo "</table>";
 		echo "</br>";
@@ -44,15 +45,25 @@
 
 		echo '<img src="./img/' . $row[3] . '.jpg" alt="' . $row[0] . ' ' . $row[1] . '" class="image-right">';
 		
-		$pers = "./html/" . $row[3] . ".html";		
+		if ($is_english)
+			$pers = "./html/en_" . $row[3] . ".html";		
+		else
+			$pers = "./html/ru_" . $row[3] . ".html";		
+			
 		insert_editable_block('editable', $pers);
 			
-		echo "<a class=\"small_link\" href={$_SERVER['PHP_SELF']}>Все художники</a>";
+		echo '<a class="small_link" href="' . $_SERVER['PHP_SELF'] . '">' . tr('All artists') . '</a>';
 	}
 	else
 	{
 		//Запрос на список художников
 		$result = mysql_query("SELECT id_artist, first_name, middle_name, last_name, token FROM artists ORDER BY last_name;");
+		
+		if ($is_english)
+			$result = mysql_query("SELECT id_artist, first_name_en, middle_name_en, last_name_en, token FROM artists ORDER BY last_name;");
+		else
+			$result = mysql_query("SELECT id_artist, first_name, middle_name, last_name, token FROM artists ORDER BY last_name;");
+		
 
 		if (!$result) {
 			die("<p>Неверный запрос: " . mysql_error() . "</p>");
@@ -75,9 +86,9 @@
 			echo "<a class=\"common-link\" href={$artist_page}>{$artist_name}</a></br>";
 			
 			if ($num_works)
-				echo "<a class=\"small_link\" href={$works_page}>Работы ({$num_works})</a></br>";
+				echo '<a class="small_link" href=' . $works_page . '>' . tr('Works') . ' (' . $num_works . ')</a></br>';
 			else
-				echo "<p class=\"small_text\">Работ не найдено</p>";
+				echo '<p class="small_text">' . tr('No works') . '</p>';
 				
 			echo "</td>";
 			

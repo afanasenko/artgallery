@@ -5,8 +5,9 @@
 
 		<div class="footer">
 <?php		
-			#require_once ("./app_config.php");	
 			require_once ("./admin_routines.php");				
+			require_once('./translation.php');			
+			
 			echo '<table width="100%" padding-left="10px"><tr>';
 			
 	
@@ -18,8 +19,8 @@
 			}
 			echo '</td>';
 	
-			echo '<td width="60%">Напишите нам:</br>';
-			echo '<a href="mailto:' . SITE_MAIL . '?Subject=Укажите%20тему" target="_top">' . SITE_MAIL . '</a></td>';
+			echo '<td width="60%">' . tr('EMAIL_US') .'</br>';
+			echo '<a href="mailto:' . SITE_MAIL . '?Subject=' . tr('BLANK_SUBJECT') . '" target="_top">' . SITE_MAIL . '</a></td>';
 			echo '<td width="20%" align="right">&copy 2014 ArtRuGallery</td>';
 			echo '</tr></table>';
 ?>   		

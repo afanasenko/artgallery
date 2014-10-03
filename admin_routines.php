@@ -181,7 +181,6 @@
 	function insert_editable_block($id, $filename)
 	{
 		echo '<script type="text/javascript" src="./tinymce/tinymce.min.js"></script>';
-		echo '<script type="text/javascript" src="./js/jquery-1.10.2.min.js" charset="utf-8"></script>';
 		echo '<script type="text/javascript" src="./js/docedit.js" charset="utf-8"></script>';
 	
 		echo '<div id="' . $id . '">';

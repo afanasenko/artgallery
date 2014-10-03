@@ -1,21 +1,17 @@
 <?php 
 	require_once("./db_connect.php");	
+	require_once("./translation.php");	
 
 	//------------------------------------------------------------------------------
 	// Возвращает имя и фамилию художника по идентификатору
 	function get_artist_name_short($aid)
 	{
-		if (!strcmp(LANG, 'en'))
-		{
+		$is_english = !strcmp(current_lang(), 'en');	
+		if ($is_english)
 			$query = "SELECT first_name_en as first_name, last_name_en as last_name FROM artists WHERE id_artist = {$aid};";
-		}
-		else if (!strcmp(LANG, 'ru'))
-		{
-			$query = "SELECT first_name_en as first_name, last_name_en as last_name FROM artists WHERE id_artist = {$aid};";
-		}
 		else
-			die('Проблема с языком!');
-	
+			$query = "SELECT first_name as first_name, last_name as last_name FROM artists WHERE id_artist = {$aid};";
+
 		$result = mysql_query($query);
 		
 		if (!$result) {
@@ -57,8 +53,13 @@
 	//
 	function artist_header($aid)
 	{
+		$is_english = !strcmp(current_lang(), 'en');	
 		//Полное имя художника со ссылкой на его страницу
-		$result = mysql_query("SELECT first_name, middle_name, last_name FROM artists WHERE id_artist = {$aid};");	
+		if ($is_english)
+			$result = mysql_query("SELECT first_name_en, middle_name_en, last_name_en FROM artists WHERE id_artist = {$aid};");	
+		else
+			$result = mysql_query("SELECT first_name, middle_name, last_name FROM artists WHERE id_artist = {$aid};");
+			
 		if ($result)
 		{
 			if (!count_elements('paintings', 'id_artist', $aid))
@@ -89,16 +90,14 @@
 	
 	function picture_desc_short($pid)
 	{
-		if (!strcmp(LANG, 'en'))
+		if (!strcmp(current_lang(), 'en'))
 		{
 			$query = "SELECT name_painting_en as name_painting, first_name_en as first_name, last_name_en as last_name FROM paintings, artists WHERE paintings.id_artist = artists.id_artist AND id_painting = {$pid};";
 		}
-		else if (!strcmp(LANG, 'ru'))
+		else
 		{
 			$query = "SELECT name_painting, first_name, last_name FROM paintings, artists WHERE paintings.id_artist = artists.id_artist AND id_painting = {$pid};";			
 		}
-		else
-			die('Проблема с языком!');
 	
 		$result = mysql_query($query);	
 	
@@ -112,11 +111,10 @@
 			return "nothing for {$pid}";
 	}	
 
-	
-	
 	function picture_description($pid)
 	{
-	//$result = mysql_query("SELECT name_painting, height, width, name_material, created FROM paintings, materials WHERE paintings.id_materials //= materials.id_material AND id_painting = {$pid};");
+		$is_english = !strcmp(current_lang(), 'en');
+		$cm = $is_english ? 'cm' : 'см';
 
 		$result = mysql_query("SELECT * FROM paintings WHERE id_painting = {$pid};");
 		
@@ -126,16 +124,20 @@
 			
 			$picsize = '';
 			if ($row['height'] and $row['width'])
-				$picsize = "{$row['height']}&nbsp;cм&nbsp;x&nbsp;{$row['width']}&nbsp;cм";
+				$picsize = "{$row['height']}&nbsp;{$cm}&nbsp;x&nbsp;{$row['width']}&nbsp;{$cm}";
 
 			$mat = '';
 			if ($row['id_material'])
 			{
-				$res2 =  mysql_query("SELECT display_name FROM materials WHERE id_material = {$row['id_material']};");
+				if ($is_english)
+					$res2 =  mysql_query("SELECT name_material_en FROM materials WHERE id_material = {$row['id_material']};");
+				else
+					$res2 =  mysql_query("SELECT name_material FROM materials WHERE id_material = {$row['id_material']};");
+				
 				if ($res2)
 				{
-					$row2 = mysql_fetch_assoc($res2);
-					$mat = ", {$row2['display_name']}";
+					$row2 = mysql_fetch_row($res2);
+					$mat = ", {$row2[0]}";
 				}
 			}
 			

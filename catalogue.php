@@ -1,6 +1,4 @@
 <?php 
-	#require_once('./authorization.php');	
-	require('./catalogue_routines.php');	
 	require('./header.php'); 
 	
 	function ggp($url) { // get GET-parameters string
@@ -10,23 +8,6 @@
 	}	
 	
 	$pic_filter = array();	
-
-/*
-<form id="catalogue-browsing" name="cataform" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="POST">
-  <table>
-    <tr>
-      <td><label>
-        <input type="radio" name="sales-filter" value="all-works" id="sales-filter-0" <?php if ($all_works_selected) echo "checked"; ?>/>
-        Все работы</label></td>
-      <td><label>
-        <input type="radio" name="sales-filter" value="sale-works" id="sales-filter-1" <?php if (!$all_works_selected) echo "checked"; ?>/>
-        Работы, выставленные на продажу</label></td>
-	  <td>
-		<input type="submit" value="Применить фильтр" /></td>
-    </tr>
-  </table>
-</form>
-*/
 
 	//----------------------------------------------------------------------------------------
 	// вывод картин заданного художника
@@ -79,16 +60,16 @@
 				picture_selection($pic_filter, False, '', $range);
 				
 				if ($cnt > 9)
-					echo "<p><a class=\"small_link\" href=/catalogue.php?artist={$row[0]}>Все работы художника</a></p>";	
+					echo '<p><a class="small_link" href="./catalogue.php?artist=' . $row[0] . '">' . tr('All artist\'s works') . '</a></p>';	
 				echo '<hr></hr>';			
 			}
 		}
 	}
 	
-	echo "<table class=\"small-menu\">";
+	echo '<table class="small-menu">';
 		echo "<tr>";	
-			echo "<td><a class=\"small_link\" href={$_SERVER['PHP_SELF']}>Все работы галереи</a></td>";
-			echo "<td><a class=\"small_link\" href=#>В начало страницы</a></td>";
+			echo '<td><a class="small_link" href="' . $_SERVER['PHP_SELF'] . '">' . tr('All works') . '</a></td>';
+			echo '<td><a class="small_link" href=#>' . tr('To page top') . '</a></td>';
 		echo "</tr>";
 	echo "</table>";
 	

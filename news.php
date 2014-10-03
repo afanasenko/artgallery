@@ -1,7 +1,6 @@
 <?php 
 	require("./header.php"); 
-	require_once("./catalogue_routines.php"); 
-	require_once("./admin_routines.php"); 	
+
 /*
 	$result = mysql_query("SELECT `id_artist`, `first_name`, `last_name`, `token` FROM `artists` ORDER BY RAND() LIMIT 4");
 	
@@ -26,16 +25,19 @@
 	echo "</ul></div></td></tr></table>";	
 */	
 
-	insert_editable_block('editable', './html/welcome.html');
+	if (!strcmp(current_lang(), 'ru'))
+		insert_editable_block('editable', './html/ru_welcome.html');
+	else
+		insert_editable_block('editable', './html/en_welcome.html');
 
 	echo '</br><hr></hr>';
-	echo '<h4>Часто просматриваемые</h4>';
+	echo '<h4>' . tr('Frequently watched') . '</h4>';
 
 	$clause = "paintings, paintings_stat WHERE paintings.id_painting=paintings_stat.id_painting ORDER by paintings_stat.num_clicks 	DESC LIMIT 3;";
 	picture_selection(null, False, $clause);
 	
 	echo '</br><hr></hr>';
-	echo '<h4>Недавно добавленные</h4>';
+	echo '<h4>' . tr('Recently added') . '</h4>';
 
 	$clause = "paintings ORDER by dt_added DESC LIMIT 3;";
 	picture_selection(null, False, $clause);	
