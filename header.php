@@ -48,8 +48,7 @@
 	# для администраторов даем ссылку на редактирование
 	if (isset($_COOKIE['username']))
 	{
-		echo $_COOKIE['username'];
-		echo '<a class="small_link" href="./switch_user.php">' . tr('CMD_EXIT') . '</a></br>';
+		echo '<a class="small_link" href="./switch_user.php">' . tr('CMD_EXIT') . ' (' . $_COOKIE['username'] . ')</a></br>';
 	}
 	else
 	{

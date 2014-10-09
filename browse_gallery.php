@@ -1,12 +1,16 @@
 <?php 
-	#require_once("./authorization.php");
 	require_once("./catalogue_routines.php");			
 	require_once("./db_connect.php");
+
+	$is_english = !strcmp(current_lang(), 'en');	
 	
-	echo "<h4 align=\"center\">Живопись:</h4>";		
+	echo '<h4 align="center">' . tr('Paintings:') . '</h4>';		
 	echo "<ul>";	
 	
-	$result = mysql_query("SELECT id_genre, name_genre, order_genre FROM genres ORDER by order_genre;");		
+	if ($is_english)
+		$result = mysql_query("SELECT id_genre, name_genre_en, order_genre FROM genres ORDER by order_genre;");		
+	else
+		$result = mysql_query("SELECT id_genre, name_genre, order_genre FROM genres ORDER by order_genre;");		
 	
 	if ($result)
 	{
@@ -18,9 +22,9 @@
 			{
 				$genre = $row[1];
 				if (!strcmp($genre,""))
-					$genre = "Другое";
+					$genre = tr('Other');
 				
-				echo "<li><a class=\"common-link\" href=/catalogue.php?genre={$row[0]}>{$genre} ({$count})</a></li>";				
+				echo "<li><a href=/catalogue.php?genre={$row[0]}>{$genre} ({$count})</a></li>";				
 			}
 		}
 	}
@@ -31,7 +35,7 @@
 
 	echo "</ul>";	
 	
-	echo "<h4 align=\"center\">Посетители сайта:</h4>";		
+	echo '<h4 align="center">' . tr('Visitors: ') . '</h4>';		
 	echo "<ul>";				
 	
 	$today = date('Y-m-d', time()); //узнаем сегодняшнюю дату
@@ -40,7 +44,7 @@
 	if ($result)
 	{
 		$row = mysql_fetch_array($result);
-		echo "<li>За сегодня: {$row[0]}</li>";						
+		echo '<li>' . tr('Today: ') . $row[0] . '</li>';
 	}	
 	else
 	{
@@ -52,7 +56,7 @@
 	if ($result)
 	{
 		$row = mysql_fetch_assoc($result);
-		echo "<li>За все время: {$row['total']}</li>";								
+		echo '<li>' . tr('Total: ') . $row['total'] . '</li>';
 	}	
 	else
 	{

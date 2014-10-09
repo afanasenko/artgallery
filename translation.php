@@ -53,7 +53,7 @@
 				
 			'EMAIL_US' => array(
 				'ru' => 'Напишите нам:', 
-				'en' => 'E-mail&nbsp;us'),					
+				'en' => 'Contact&nbsp;us'),					
 				
 			'BLANK_SUBJECT' => array(
 				'ru' => 'Укажите%20тему', 
@@ -85,7 +85,29 @@
 			'Next' => array('ru' => 'Следующая'),
 			'All works' => array('ru' => 'Все работы галереи'),
 			'To page top' => array('ru' => 'В начало страницы'),
-			'All artist\'s works' => array('ru' => 'Все работы художника')
+			'All artist\'s works' => array('ru' => 'Все работы художника'),
+			'Paintings:' => array('ru' => 'Живопись:'),
+			'Other' => array('ru' => 'Другое'),
+			'Visitors: ' => array('ru' => 'Посетители сайта: '),
+			'Today: ' => array('ru' => 'За сегодня: '),
+			'Total: ' => array('ru' => 'За все время: '),
+			'Map:' => array('ru' => 'Карта проезда:'),
+			'ERR_USER_CONTACT' => array('ru' => 'Укажите Ваше имя и хотя бы один способ связи.', 'en' => 'Please, specify your name and at least one way to contact you'),
+			'Order information' => array('ru' => 'Информация о заказе'),
+			'Description' => array('ru' => 'Описание'),
+			'Price' => array('ru' => 'Цена'),
+			'Delete' => array('ru' => 'Удалить'),
+			'TOTAL_PRICE' => array('ru' => 'Итого:', 'en' => 'Total'),
+			'Refresh' => array('ru' => 'Обновить'),
+			'EMPTY_BASKET_MSG' => array('ru' => 'Ваша корзина пуста. Добавьте в нее понравившиеся картины из каталога и оформите заказ', 'en' => 'Your chart is empty. Please add the paintings you like and make an order'),
+			'Your name' => array('ru' => 'Ваше имя'),
+			'Your phone number' => array('ru' => 'Телефон'),
+			'Your e-mail' => array('ru' => 'Электронная почта'),
+			'Additional info' => array('ru' => 'Дополнительная информация к заказ'),
+			'Make an order' => array('ru' => 'Оформить заказ'),
+			'Clear your chart' => array('ru' => 'Очистить корзину'),
+			'Your chart is empty' => array('ru' => 'Ваша корзина пуста'),
+			'Orders' => array('ru' => 'Заказы')
 		);
 
 		if (isset($_COOKIE['language']))

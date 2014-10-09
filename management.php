@@ -9,12 +9,13 @@
 /*
 		echo '<td><a class="small_link" href="' . $_SERVER['PHP_SELF'] . '?page=3">Добавить художника</a></td>';				
 */		
+		echo '<td><a class="small_link" href="' . $_SERVER['PHP_SELF'] . '?page=4">Просмотр заказов</a></td>';				
 	echo '</tr></table>';
 	
 	if (isset($_GET['page']))
 		$page = $_GET['page'];
 	else
-		$page = 1;
+		$page = 4;
 		
 	if ($page == 1)
 	{
@@ -22,15 +23,21 @@
 		include("./edit_painting.php");
 		echo '</div>';
 	}
-	else if ($page == 2)
+	elseif ($page == 2)
 	{
 		echo '<div>';
 		include("./edit_publication.php");
 		echo '</div>';	
 	}
-	else if ($page == 3)
+	elseif ($page == 3)
 	{
 	}
+	elseif ($page == 4)
+	{
+		echo '<div>';
+		include("./edit_orders.php");
+		echo '</div>';
+	}	
 	
 	require("./altfooter.php"); 	
 ?>

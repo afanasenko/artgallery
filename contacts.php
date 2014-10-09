@@ -1,22 +1,32 @@
 <?php 
-	#require_once("./authorization.php");	
-	require_once ("./app_config.php");	
 	require("./header.php"); 
-?>
+	require_once("./translation.php");		
+	$is_english = !strcmp(current_lang(), 'en');	
+	
+	if ($is_english)
+	{
+		echo('<h4>Location:</h4>');
+		echo('<p>20 "L" Kamskaya st., Saint Petersburg, Russia</p>');
 
-	<h4>Наш адрес:</h4>		
-	<p>г. Санкт-Петербург, ул. Камская, д. 20, лит. "Л"</p>
-	
-	<h4>Телефон для связи:</h4>		
-	<p>8(812) 958-10-36</p>	
+		echo('<h4>Phone number:</h4>');
+		echo('<p>8(812) 958-10-36</p>');	
+		echo('<h4>E-mail:</h4>');			
+	}
+	else
+	{
+		echo('<h4>Наш адрес:</h4>');
+		echo('<p>г. Санкт-Петербург, ул. Камская, д. 20, лит. "Л"</p>');
 
-	<h4>Электронная почта:</h4>		
-<?php	
-	echo '<p><a href="mailto:' . SITE_MAIL . '?Subject=Укажите%20тему" target="_top">' . SITE_MAIL . '</a></p>';
+		echo('<h4>Телефон для связи:</h4>');
+		echo('<p>8(812) 958-10-36</p>');
+
+		echo('<h4>Электронная почта:</h4>');
+	}
+	
+	echo '<p><a href="mailto:' . SITE_MAIL . '?Subject=' . tr('BLANK_SUBJECT') . '" target="_top">' . SITE_MAIL . '</a></p>';
+	
+	echo('<h4>' . tr('Map:') . '</h4>');
 ?>
-	
-	<h4>Карта проезда:</h4>	
-	
 	
 <script type="text/javascript" charset="utf-8" src="//api-maps.yandex.ru/services/constructor/1.0/js/?sid=OCgKoAUwLr_lmxtctnPhG6LbU9NP5mf5&width=600&height=450"></script>
 

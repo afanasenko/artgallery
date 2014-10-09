@@ -100,5 +100,5 @@
 		echo "</tr></table>";
 	}
 	
-	require("./footer.php"); 
+	require("./altfooter.php"); 
 ?>

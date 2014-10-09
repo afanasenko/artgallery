@@ -2,10 +2,11 @@
 	require_once("./admin_routines.php");		
 	require("./header.php");
 	
-	//FIXME: при ошибках не нарушать скелет страницы!!!
-	require_once("./db_connect.php");
-
-	insert_editable_block('editable', './html/services.html');
+	$is_english = !strcmp(current_lang(), 'en');	
+	if ($is_english)	
+		insert_editable_block('editable', './html/en_services.html');
+	else
+		insert_editable_block('editable', './html/ru_services.html');	
 	
 	require("./altfooter.php"); 
 ?>

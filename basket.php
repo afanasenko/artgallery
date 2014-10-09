@@ -42,7 +42,7 @@
 		
 		if ($flag3 or ($flag1 && $flag2))
 		{
-			echo '<p>Укажите Ваше имя и хотя бы один способ связи.</p>';
+			echo '<p>' . tr('ERR_USER_CONTACT') . '</p>';
 		}
 		else
 		{
@@ -79,6 +79,8 @@
 			{
 				echo '<p>Mail delivery error!</p>';
 			}
+			
+			//$query = 'INSERT INTO `shop_orders`
 		}
 	}
 	else
@@ -110,7 +112,7 @@
 	
 	if (check_table($basket))
 	{
-		echo '<h4>Информация о заказе</h4>';
+		echo '<h4>' . tr('Order information') . '</h4>';
 	
 		echo '<form id="change_order" action="' . $_SERVER['PHP_SELF'] . '" method="POST">';	
 		echo '<table class="dataedit">';
@@ -121,7 +123,7 @@
 			
 		if (mysql_num_rows($result))
 		{
-			echo '<tr class="oddrow"><th>Описание</th><th>Цена, $</th><th>Удалить</th></tr>';
+			echo '<tr class="oddrow"><th>' . tr('Description') . '</th><th>' . tr('Price') . ', $</th><th>' . tr('Delete') . '</th></tr>';
 			
 			$rn = 0;
 			$total_price = 0;
@@ -147,13 +149,13 @@
 				$rn++;
 			}
 			
-			echo '<tr class="oddrow"><td>Итого:</td><td>' . $total_price . '</td>';
-			echo '<td><input type="submit" name="refresh" value="Обновить"/></td>';
+			echo '<tr class="oddrow"><td>' . tr('TOTAL_PRICE') . '</td><td>' . $total_price . '</td>';
+			echo '<td><input type="submit" name="refresh" value="' . tr('Refresh') . '"/></td>';
 			echo '</tr>';
 		}
 		else
 		{
-			echo '<h4>Ваша корзина пуста. Добавьте в нее понравившиеся картины из каталога и оформите заказ.</h4>';
+			echo '<h4>' . tr('EMPTY_BASKET_MSG') . '</h4>';
 		}
 		
 		echo '</table>';
@@ -161,26 +163,26 @@
 	
 		echo '<form id="make_order" action="' . $_SERVER['PHP_SELF'] . '" method="POST">';
 
-		echo '<h4>Ваше имя</h4>';
+		echo '<h4>' . tr('Your name') . '</h4>';
 		echo '<div><input type="text" size="50" maxlength="32" name="client_name" value="' . $cl_name . '"/></div>';		
-		echo '<h4>Телефон</h4>';
+		echo '<h4>' . tr('Your phone number') . '</h4>';
 		echo '<div><input type="text" size="50" maxlength="32" name="client_phone" value="' . $cl_phone . '"/></div>';		
-		echo '<h4>Электронная почта</h4>';
+		echo '<h4>' . tr('Your e-mail') . '</h4>';
 		echo '<div><input type="text" size="50" maxlength="32" name="client_mail" value="' . $cl_mail . '"/></div>';				
 		
-		echo '<h4>Дополнительная информация к заказу</h4>';
+		echo '<h4>' . tr('Additional info') . '</h4>';
 		echo '<div><textarea rows="4" cols="50" name="extra_info">' . $extra_info . '</textarea></div></br>';			
 			
 		echo '<table>';
-		echo '<tr><td><input type="submit" name="buy" value="Оформить заказ"/></td>';
-		echo '<td><input type="submit" name="cancel_buy" value="Очистить корзину"/></td></tr>';
+		echo '<tr><td><input type="submit" name="buy" value="' . tr('Make an order') . '"/></td>';
+		echo '<td><input type="submit" name="cancel_buy" value="' . tr('Clear your chart') . '"/></td></tr>';
 		echo '</table>';
 		echo '</form>';
 	}
 	else
 	{
-		echo '<p>Ваша корзина пуста</p>';
+		echo '<p>' . tr('Your chart is empty') . '</p>';
 	}
 	
-	require("./footer.php"); 
+	require("./altfooter.php"); 
 ?>
