@@ -97,7 +97,7 @@
 			'Description' => array('ru' => 'Описание'),
 			'Price' => array('ru' => 'Цена'),
 			'Delete' => array('ru' => 'Удалить'),
-			'TOTAL_PRICE' => array('ru' => 'Итого:', 'en' => 'Total'),
+			'TOTAL_PRICE' => array('ru' => 'Итого', 'en' => 'Total'),
 			'Refresh' => array('ru' => 'Обновить'),
 			'EMPTY_BASKET_MSG' => array('ru' => 'Ваша корзина пуста. Добавьте в нее понравившиеся картины из каталога и оформите заказ', 'en' => 'Your chart is empty. Please add the paintings you like and make an order'),
 			'Your name' => array('ru' => 'Ваше имя'),
@@ -107,7 +107,14 @@
 			'Make an order' => array('ru' => 'Оформить заказ'),
 			'Clear your chart' => array('ru' => 'Очистить корзину'),
 			'Your chart is empty' => array('ru' => 'Ваша корзина пуста'),
-			'Orders' => array('ru' => 'Заказы')
+			'Orders' => array('ru' => 'Заказы'),
+			'Created' => array('ru' => 'Дата создания'),
+			'Status' => array('ru' => 'Состояние'),
+			'Buyer' => array('ru' => 'Покупатель'),
+			'Action' => array('ru' => 'Действия'),
+			'Vote!' => array('ru' => 'Голосовать'),
+			'Accept' => array('ru' => 'Принять'),
+			'Discard' => array('ru' => 'Отклонить')
 		);
 
 		if (isset($_COOKIE['language']))

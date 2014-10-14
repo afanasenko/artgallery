@@ -308,10 +308,15 @@ table.dataedit {
 	background:#fff2f3;
 	margin:0;
 	border-collapse: collapse;
+	width:100%;
 }
 
 table.dataedit tr.oddrow{
 	background:#ffffff;
 	border: 0px;
 	margin:0;
+}
+
+table.dataedit th {
+	text-align: left;
 }

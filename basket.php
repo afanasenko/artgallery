@@ -9,8 +9,58 @@
 		else
 			return False;
 	}
+	
+	function order_confirmation($tbl, $cl_name, $cl_mail, $cl_phone)
+	{
+		# создаем запись в общей таблице заказов
+		# устанавливаем статус и дату
+		$query = 'INSERT INTO `shop_orders` (`created`, `status`) VALUES ("' . date("Y-m-d H:i:s") . '", 1);';
+		if (mysql_query($query))
+		{
+			# идентификатор записи
+			$order_id = mysql_insert_id();
+			# переименовываем временную таблицу на основе сквозного номера заказа
+			$query = 'RENAME TABLE `' . $tbl . '` TO `order_' . $order_id . '`;';
+			if (mysql_query($query))
+			{
+				
+				$clause = '';
+				# устанавливаем данные покупателя
+				if (!empty($cl_name))
+					$clause = '`buyer_name` = "' . $cl_name . '"';
+				if (!empty($cl_mail))
+					$clause .= ', `buyer_email` = "' . $cl_mail . '"';					
+				if (!empty($cl_phone))
+					$clause .= ', `buyer_phone` = "' . $cl_phone . '"';										
+					
+				# дописываем атрибуты
+				$query = 'UPDATE LOW_PRIORITY `shop_orders` SET ' . $clause . ' WHERE `id` = ' . $order_id . ';';
+				mysql_query($query)
+					or die(mysql_error());			
+			}
+			else
+			{
+				mysql_query('DELETE FROM `shop_orders` WHERE `id` = ' . $order_id . ';')
+					or die(mysql_error());			
+			}
+		}
+		else
+		{
+			die('Ошибка при выполнении SQL-запроса: ' . mysql_error());			
+		}
+	}
 
-	$basket = basket_name();
+	if (isset($_GET['order']))
+	{
+		$basket = $_GET['order'];
+		$editable = False;
+	}	
+	else
+	{
+		$basket = basket_name();
+		$editable = True;
+	}
+		
 	$cl_name = '';
 	$cl_phone = '';
 	$cl_mail = '';
@@ -29,12 +79,6 @@
 			
 		if (isset($_POST['extra_info']))
 			$extra_info = $_POST['extra_info'];						
-		
-		/*
-		if (empty($cl_phone)) echo 'True'; else echo 'False';
-		if (empty($cl_mail)) echo 'True'; else echo 'False';
-		if (empty($cl_name)) echo 'True'; else echo 'False';
-		*/
 		
 		$flag1 = empty($cl_phone);
 		$flag2 = empty($cl_mail);
@@ -79,8 +123,7 @@
 			{
 				echo '<p>Mail delivery error!</p>';
 			}
-			
-			//$query = 'INSERT INTO `shop_orders`
+			order_confirmation($basket, $cl_name, $cl_mail, $cl_phone);
 		}
 	}
 	else
@@ -112,7 +155,7 @@
 	
 	if (check_table($basket))
 	{
-		echo '<h4>' . tr('Order information') . '</h4>';
+		echo '<h4>' . tr('Order information') . '</h4><hr></hr>';
 	
 		echo '<form id="change_order" action="' . $_SERVER['PHP_SELF'] . '" method="POST">';	
 		echo '<table class="dataedit">';
@@ -123,7 +166,10 @@
 			
 		if (mysql_num_rows($result))
 		{
-			echo '<tr class="oddrow"><th>' . tr('Description') . '</th><th>' . tr('Price') . ', $</th><th>' . tr('Delete') . '</th></tr>';
+			echo '<tr class="oddrow"><th>' . tr('Description') . '</th><th>' . tr('Price') . ', $</th>';
+			if ($editable)
+				echo '<th>' . tr('Delete') . '</th>';
+			echo '</tr>';
 			
 			$rn = 0;
 			$total_price = 0;
@@ -143,14 +189,17 @@
 				else
 					echo '<td></td>';
 				
-				echo '<td><input type="checkbox" name="rm_' .  $row['id_painting']. '"></td>';
+				if ($editable)
+					echo '<td><input type="checkbox" name="rm_' .  $row['id_painting']. '"></td>';
 					
 				echo '</tr>';
 				$rn++;
 			}
 			
-			echo '<tr class="oddrow"><td>' . tr('TOTAL_PRICE') . '</td><td>' . $total_price . '</td>';
-			echo '<td><input type="submit" name="refresh" value="' . tr('Refresh') . '"/></td>';
+			echo '<tr class="oddrow"><td>' . tr('TOTAL_PRICE') . ': ' . $total_price . '</td><td></td>';
+			if ($editable)			
+				echo '<td><input type="submit" name="refresh" value="' . tr('Refresh') . '"/></td>';
+			
 			echo '</tr>';
 		}
 		else
@@ -160,24 +209,28 @@
 		
 		echo '</table>';
 		echo '</form>';
-	
-		echo '<form id="make_order" action="' . $_SERVER['PHP_SELF'] . '" method="POST">';
 
-		echo '<h4>' . tr('Your name') . '</h4>';
-		echo '<div><input type="text" size="50" maxlength="32" name="client_name" value="' . $cl_name . '"/></div>';		
-		echo '<h4>' . tr('Your phone number') . '</h4>';
-		echo '<div><input type="text" size="50" maxlength="32" name="client_phone" value="' . $cl_phone . '"/></div>';		
-		echo '<h4>' . tr('Your e-mail') . '</h4>';
-		echo '<div><input type="text" size="50" maxlength="32" name="client_mail" value="' . $cl_mail . '"/></div>';				
-		
-		echo '<h4>' . tr('Additional info') . '</h4>';
-		echo '<div><textarea rows="4" cols="50" name="extra_info">' . $extra_info . '</textarea></div></br>';			
+		if ($editable)
+		{
+			echo '<hr></hr>';
+			echo '<form id="make_order" action="' . $_SERVER['PHP_SELF'] . '" method="POST">';
+
+			echo '<h4>' . tr('Your name') . '</h4>';
+			echo '<div><input type="text" size="50" maxlength="32" name="client_name" value="' . $cl_name . '"/></div>';		
+			echo '<h4>' . tr('Your phone number') . '</h4>';
+			echo '<div><input type="text" size="50" maxlength="32" name="client_phone" value="' . $cl_phone . '"/></div>';		
+			echo '<h4>' . tr('Your e-mail') . '</h4>';
+			echo '<div><input type="text" size="50" maxlength="32" name="client_mail" value="' . $cl_mail . '"/></div>';				
 			
-		echo '<table>';
-		echo '<tr><td><input type="submit" name="buy" value="' . tr('Make an order') . '"/></td>';
-		echo '<td><input type="submit" name="cancel_buy" value="' . tr('Clear your chart') . '"/></td></tr>';
-		echo '</table>';
-		echo '</form>';
+			echo '<h4>' . tr('Additional info') . '</h4>';
+			echo '<div><textarea rows="4" cols="50" name="extra_info">' . $extra_info . '</textarea></div></br>';			
+
+			echo '<table>';
+			echo '<tr><td><input type="submit" name="buy" value="' . tr('Make an order') . '"/></td>';
+			echo '<td><input type="submit" name="cancel_buy" value="' . tr('Clear your chart') . '"/></td></tr>';
+			echo '</table>';
+			echo '</form>';
+		}		
 	}
 	else
 	{
