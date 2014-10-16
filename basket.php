@@ -216,14 +216,14 @@
 			echo '<form id="make_order" action="' . $_SERVER['PHP_SELF'] . '" method="POST">';
 
 			echo '<h4>' . tr('Your name') . '</h4>';
-			echo '<div><input type="text" size="50" maxlength="32" name="client_name" value="' . $cl_name . '"/></div>';		
+			echo '<div><input type="text" size="60" maxlength="32" name="client_name" value="' . $cl_name . '"/></div>';		
 			echo '<h4>' . tr('Your phone number') . '</h4>';
-			echo '<div><input type="text" size="50" maxlength="32" name="client_phone" value="' . $cl_phone . '"/></div>';		
+			echo '<div><input type="text" size="60" maxlength="32" name="client_phone" value="' . $cl_phone . '"/></div>';		
 			echo '<h4>' . tr('Your e-mail') . '</h4>';
-			echo '<div><input type="text" size="50" maxlength="32" name="client_mail" value="' . $cl_mail . '"/></div>';				
+			echo '<div><input type="text" size="60" maxlength="32" name="client_mail" value="' . $cl_mail . '"/></div>';				
 			
 			echo '<h4>' . tr('Additional info') . '</h4>';
-			echo '<div><textarea rows="4" cols="50" name="extra_info">' . $extra_info . '</textarea></div></br>';			
+			echo '<div><textarea rows="4" cols="53" name="extra_info">' . $extra_info . '</textarea></div></br>';			
 
 			echo '<table>';
 			echo '<tr><td><input type="submit" name="buy" value="' . tr('Make an order') . '"/></td>';

@@ -276,4 +276,31 @@
 			die("<p>Ошибка при выполнении SQL-запроса: " . mysql_error() . "</p>");
 		}	
 	}	
+	
+	//------------------------------------------------------------------------------	
+	// FIXME: change painting_stat !!!
+	
+	function count_watches_by_artist($artist)	
+	{
+		$query = 'SELECT `id_painting` FROM `paintings` WHERE `id_artist` = ' . $artist . ';';
+		$res = mysql_query($query);
+		if (!$res)
+			return "<p>Ошибка при выполнении SQL-запроса: " . $query . "</p>";
+		
+		$num = 0; 
+		
+		while($row = mysql_fetch_row($res))
+		{
+			$query = 'SELECT `num_clicks` FROM `paintings_stat` WHERE `id_painting` = ' . $row[0] . ';';
+			$result = mysql_query($query);
+			if (!$result)
+				return "<p>Ошибка при выполнении SQL-запроса: " . $query . "</p>";
+				
+			$row2 = mysql_fetch_row($result);
+			if ($row2)
+				$num += $row2[0];
+		}
+		
+		return tr('Watched: ') . $num . tr(' times');
+	}
 ?>

@@ -86,9 +86,14 @@
 			echo "<a class=\"common-link\" href={$artist_page}>{$artist_name}</a></br>";
 			
 			if ($num_works)
+			{
 				echo '<a class="small_link" href=' . $works_page . '>' . tr('Works') . ' (' . $num_works . ')</a></br>';
+				echo '<p class="small_text">' . count_watches_by_artist($row[0]) . '</p></br>';				
+			}
 			else
-				echo '<p class="small_text">' . tr('No works') . '</p>';
+			{
+				echo '<p class="small_text">' . tr('No works') . '</p></br>';
+			}	
 				
 			echo "</td>";
 			

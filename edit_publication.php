@@ -32,6 +32,9 @@
 <?php 
 	require_once("./catalogue_routines.php");	
 	require_once("./admin_routines.php");	
+	
+	if (!is_admin())
+		die("This page may be accessed only by administrator");
 
 /*	
 	# ---------------------------------------------------------------------

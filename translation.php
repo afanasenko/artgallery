@@ -73,10 +73,10 @@
 			'Vote' => array('ru' => 'Голосовать!'),
 			'Average score: ' => array('ru' => 'Средняя оценка: '),
 			'votes: ' => array('ru' => 'голосов: '),
-			'Watched: ' => array('ru' => 'Количество просмотров: '),
+			'Watched: ' => array('ru' => 'Число просмотров: ', 'en' => 'Viewed: '),
 			'Your score: ' => array('ru' => 'Ваша оценка: '),
 			'Added to catalogue ' => array('ru' => 'Добавлена в каталог '),
-			'Buy' => array('ru' => 'Купить'),
+			'Buy' => array('ru' => 'Добавить в корзину', 'en' => 'Add to chart'),
 			'Order a copy' => array('ru' => 'Заказать копию'),
 			'Сall' => array('ru' => 'Уточняйте'),
 			'Edit' => array('ru' => 'Редактировать'),
@@ -114,7 +114,8 @@
 			'Action' => array('ru' => 'Действия'),
 			'Vote!' => array('ru' => 'Голосовать'),
 			'Accept' => array('ru' => 'Принять'),
-			'Discard' => array('ru' => 'Отклонить')
+			'Discard' => array('ru' => 'Отклонить'),
+			' times' => array('ru' => '')
 		);
 
 		if (isset($_COOKIE['language']))
