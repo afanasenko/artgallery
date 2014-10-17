@@ -50,5 +50,5 @@ function initialize() {
 
 
 <?php 
-	require("./altfooter.php"); 
+	require("./footer.php"); 
 ?>

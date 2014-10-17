@@ -8,5 +8,5 @@
 	else
 		insert_editable_block('editable', './html/ru_services.html');	
 	
-	require("./altfooter.php"); 
+	require("./footer.php"); 
 ?>

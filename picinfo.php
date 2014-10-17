@@ -122,7 +122,7 @@
 			echo '<tr><td>' . tr('Added to catalogue ') . $picdate . '</td></tr>';
 		}
 		
-		echo '<tr><td>' . tr('Watched: ') . $picstat['num_clicks'] . '</td></tr>';		
+		echo '<tr><td>' . tr('Watched: ') . $picstat['num_clicks'] . tr(' times') . '</td></tr>';		
 		echo '<tr><td id="httpresp">' . tr('Average score: ') . $rating . ' (' . tr('votes: ') . $picstat['num_rates'] . ')</td>';
 		echo '<td>' . tr('Your score: ');
 		

@@ -115,7 +115,8 @@
 			'Vote!' => array('ru' => 'Голосовать'),
 			'Accept' => array('ru' => 'Принять'),
 			'Discard' => array('ru' => 'Отклонить'),
-			' times' => array('ru' => '')
+			' times' => array('ru' => ''),
+			'Random painting' => array('ru' => 'Случайная картина')
 		);
 
 		if (isset($_COOKIE['language']))

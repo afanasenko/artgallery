@@ -3,7 +3,21 @@
 			
 			<div class="left_sidebar">
 <?php 
-	require("./browse_gallery.php");	
+
+	//FIXME: изучить регулярные выражения!
+	$pieces = explode("/", $_SERVER['REQUEST_URI']);
+	$pieces = explode("?", end($pieces));
+	$pieces = explode(".", $pieces[0]);
+	
+	if (!strcmp($pieces[0], 'catalogue'))
+		require("./browse_gallery.php");	
+	elseif (strcmp($pieces[0], 'management'))
+	{
+		echo '<div style="padding-left:1em;"><h4>' . tr('Random painting') . '</h4>';
+		$clause = "paintings ORDER by RAND() LIMIT 1;";
+		picture_selection(null, False, $clause);
+		echo '</div>';
+	}
 ?>
 			</div><!-- .left_sidebar-->     
 

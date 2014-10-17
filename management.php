@@ -39,5 +39,5 @@
 		echo '</div>';
 	}	
 	
-	require("./altfooter.php"); 	
+	require("./footer.php"); 	
 ?>

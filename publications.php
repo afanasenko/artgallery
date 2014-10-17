@@ -56,5 +56,5 @@
 			echo '<a class="small_link" href="./management.php?page=2">Новая публикация</a>';				
 	}
 	
-	require("./altfooter.php"); 
+	require("./footer.php"); 
 ?>

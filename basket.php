@@ -237,5 +237,5 @@
 		echo '<p>' . tr('Your chart is empty') . '</p>';
 	}
 	
-	require("./altfooter.php"); 
+	require("./footer.php"); 
 ?>

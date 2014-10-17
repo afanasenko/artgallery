@@ -42,5 +42,5 @@
 	$clause = "paintings ORDER by dt_added DESC LIMIT 3;";
 	picture_selection(null, False, $clause);	
 
-	require("./altfooter.php"); 
+	require("./footer.php"); 
 ?>
